@@ -5,7 +5,8 @@ const Mutex = require('async-mutex').Mutex;
 const { Client, Collection, EmbedBuilder } = require('discord.js');
 const { GatewayIntentBits } = require("discord-api-types/v10");
 const { stringSimilarity } = require("string-similarity-js");
-const { Client:YTClient, MusicClient } = require("youtubei");
+const { Client:YTClient, MusicClient } = require("youtube");
+const { getRandomIPv6 } = require("@distube/ytdl-core/lib/utils");
 const {
 	joinVoiceChannel,
 	createAudioPlayer,
@@ -115,7 +116,10 @@ const regexFt = /^(.+?)\s*\((.*)\)$/;
 const regexAlphanumeric = /([a-zA-Z0-9]+)/g;
 
 client.playSong = function(url, inst) {
-	const stream = ytdl(url, {filter: 'audioonly'});
+	const randomIP = ytdl.createAgent(undefined, {
+	  localAddress: getRandomIPv6("2001:2::/48"),
+	});
+	const stream = ytdl(url, {filter: 'audioonly', agent: randomIP});
 	const resource = createAudioResource(stream);
 	inst.player.play(resource);
 	return entersState(inst.player, AudioPlayerStatus.Playing, 5000);
@@ -218,8 +222,10 @@ client.playSongList = async function(videos, index, channel, inst) {
 	start = Math.floor(Math.random() * (start+1));
 	console.log("start at " + start.toString());
 	
-
-	const stream = ytdl("https://www.youtube.com/watch?v=" + videos[index].id, { quality :"highestvideo", begin: start.toString() + "s", filter: "audioandvideo" });
+	const randomIP = ytdl.createAgent(undefined, {
+	  localAddress: getRandomIPv6("2001:2::/48"),
+	});
+	const stream = ytdl("https://www.youtube.com/watch?v=" + videos[index].id, { quality :"highestvideo", begin: start.toString() + "s", filter: "audioandvideo", agent: randomIP });
 	const resource = createAudioResource(stream);
 	/**
 	 * We will now play this to the audio player. By default, the audio player will not play until
