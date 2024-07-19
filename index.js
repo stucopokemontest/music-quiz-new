@@ -5,7 +5,7 @@ const Mutex = require('async-mutex').Mutex;
 const { Client, Collection, EmbedBuilder } = require('discord.js');
 const { GatewayIntentBits } = require("discord-api-types/v10");
 const { stringSimilarity } = require("string-similarity-js");
-const { Client:YTClient, MusicClient } = require("youtube");
+const { Client:YTClient, MusicClient } = require("youtubei");
 const { getRandomIPv6 } = require("@distube/ytdl-core/lib/utils");
 const {
 	joinVoiceChannel,
