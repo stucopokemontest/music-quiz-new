@@ -29,6 +29,7 @@
 		"prism-media": "^2.0.0-alpha.0",
 		"string-similarity-js": "^2.1.4",
 		"youtubei": "^1.4.2",
-		"ytdl-core": "^4.11.5"
+		"ytdl-core": "^4.11.5",
+		"express": "^4.19.2"
 	}
 }
