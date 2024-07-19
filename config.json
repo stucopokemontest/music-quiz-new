@@ -1,4 +1,0 @@
-{
-    "clientId": process.env.ID,
-    "token": process.env.TOKEN
-}
